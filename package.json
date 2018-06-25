@@ -1,0 +1,25 @@
+{
+  "name": "MMM-alerte-meteo",
+  "version": "0.0.1",
+  "description": "MagicMirror Module for meteo alerte",
+  "main": "MMM-alerte-meteo.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Knurlnheim/MMM-alerte-meteo.git"
+  },
+  "keywords": [
+    "MagicMirror",
+    "Module",
+    "Meteo",
+    "Alerte"
+  ],
+  "author": "Marc F.",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/Knurlnheim/MMM-alerte-meteo/issues"
+  },
+  "homepage": "https://github.com/Knurlnheim/MMM-alerte-meteo#readme",
+  "dependencies": {
+    "xml-js": "latest"
+  }
+}

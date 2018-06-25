@@ -1,0 +1,38 @@
+
+
+.vigired {
+  color: Crimson;
+}
+
+.vigiorange {
+  color: Orange;
+}
+
+.vigiyellow {
+  color: Yellow;
+}
+
+.vigigreen {
+  color: Green;
+}
+
+.td-align-right {
+  text-align: right;
+}
+
+.xmedium
+{
+  font-size: 40px;
+  line-height: 45px;
+}
+
+.dept {
+    padding-left: 0;
+    padding-right: 25px;
+}
+
+.weather-icon {
+    text-align: center;
+    vertical-align: text-bottom;
+    padding-bottom: 5px;
+}
