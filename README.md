@@ -6,6 +6,7 @@ Clone this repo, and in the resulting directory, run "npm install"
 
 # Configuration
 In your module in config.js, add :
+```
 {
         module: "MMM-alerte-meteo",
         header: "Vigilance Météo :",
@@ -19,3 +20,4 @@ In your module in config.js, add :
                 ],
         }
 },
+```
