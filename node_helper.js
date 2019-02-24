@@ -21,13 +21,15 @@ module.exports = NodeHelper.create({
                 if (deptResult[i].attributes.dep === deptsList[j].id) {
                   var dept = deptResult[i].attributes.dep;
                   var couleur = deptResult[i].attributes.coul;
-                  if (typeof deptResult[i].risque !== "undefined" && deptResult[i].risque !== null)  {
+                  if (parseInt(couleur) > 1)  {
+                  //if (typeof deptResult[i].risque !== "undefined" && deptResult[i].risque !== null)  {
                     var risque = deptResult[i].risque.attributes.val;
                   } else {
                     var  risque ="0";
                   }
-                  result[j] = {'dept': dept, 'label': deptsList[j].label, 'couleur': couleur, 'risque': risque };
-//                  console.log(result[j]) ; // {a: 5, b: 6}
+		                result_item = {'dept': dept, 'label': deptsList[j].label, 'couleur': couleur, 'risque': risque };
+                    result.push(result_item);
+                  //console.log(result[j]) ; // {a: 5, b: 6}
                 }
               }
             }
