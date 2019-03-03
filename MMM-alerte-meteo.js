@@ -67,7 +67,7 @@ Module.register("MMM-alerte-meteo", {
     }
 
     var table = document.createElement("table");
-    table.className = "xmedium";
+    table.className = "medium";
     for (var i in this.vigilances) {
       if (parseInt(this.vigilances[i].couleur) > 1) {
         var color = this.colorClass[this.vigilances[i].couleur];

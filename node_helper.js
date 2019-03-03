@@ -16,19 +16,34 @@ module.exports = NodeHelper.create({
             //var deptsList = ["59", "62", "57", "27", "32"];
             var result = [];
             for (var j in deptsList) {
-            //   console.log("id " + deptsList[j].id + " label " + deptsList[j].label);
+            // console.log("id " + deptsList[j].id + " label " + deptsList[j].label);
               for (var i in deptResult) {
                 if (deptResult[i].attributes.dep === deptsList[j].id) {
                   var dept = deptResult[i].attributes.dep;
                   var couleur = deptResult[i].attributes.coul;
-                  if (parseInt(couleur) > 1)  {
+                  // console.log("id " + deptsList[j].id +" couleur "+ deptResult[i].attributes.coul);
+                  // console.log(Array.isArray(deptResult[i].risque));
+                  if (parseInt(couleur) > 1 )  {
                   //if (typeof deptResult[i].risque !== "undefined" && deptResult[i].risque !== null)  {
-                    var risque = deptResult[i].risque.attributes.val;
+                    if (Array.isArray(deptResult[i].risque)) {
+                    //  console.log("its an array of " + deptResult[i].risque.length);
+                      for (var n in deptResult[i].risque) {
+                    //    console.log("iteration " + n);
+                        var risque = deptResult[i].risque[n].attributes.val;
+                        result_item = {'dept': dept, 'label': deptsList[j].label, 'couleur': couleur, 'risque': risque };
+                    //    console.log(result_item);
+                        result.push(result_item);
+                      }
+                    } else {
+                      var risque = deptResult[i].risque.attributes.val;
+                      result_item = {'dept': dept, 'label': deptsList[j].label, 'couleur': couleur, 'risque': risque };
+                      result.push(result_item);
+                    }
                   } else {
                     var  risque ="0";
+                    result_item = {'dept': dept, 'label': deptsList[j].label, 'couleur': couleur, 'risque': risque };
+                        result.push(result_item);
                   }
-		                result_item = {'dept': dept, 'label': deptsList[j].label, 'couleur': couleur, 'risque': risque };
-                    result.push(result_item);
                   //console.log(result[j]) ; // {a: 5, b: 6}
                 }
               }
