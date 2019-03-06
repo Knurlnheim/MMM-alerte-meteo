@@ -90,7 +90,8 @@ Module.register("MMM-alerte-meteo", {
         iconCell.appendChild(icon);
       }
     }
-    return table;
+    wrapper.appendChild(table)
+    return wrapper;
   },
 
 
