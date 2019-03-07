@@ -134,7 +134,7 @@ Module.register("MMM-alerte-meteo", {
           //Log.info("hidden was true") ;
         }
         this.updateDom(fade);
-        Log.info("updateDom") ;
+        //Log.info("updateDom") ;
       } else {
         if (this.hidden == false ) {
           this.hide(1000, {lockString: this.identifier});
