@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/Knurlnheim/MMM-alerte-meteo#readme",
   "dependencies": {
-    "xml-js": "latest"
+    "axios": "^1.6.0"
   }
 }
