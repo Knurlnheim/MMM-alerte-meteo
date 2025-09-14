@@ -71,47 +71,59 @@ Module.register("MMM-alerte-meteo", {
 //	 Log.info(this.vigilances[i].bloc_items.find(x => x.id === "DEP_QUALIFICATION_ZONAL" ));
 
 
-      if (this.vigilances[i].bloc_items.length != 0 && ( typeof this.vigilances[i].bloc_items.find(x => x.id === "DEP_SITUATION" ) !== 'undefined' || typeof this.vigilances[i].bloc_items.find(x => x.id === "DEP_SUIVI" ) !== 'undefined' || typeof this.vigilances[i].bloc_items.find(x => x.id === "DEP_QUALIFICATION" ) !== 'undefined' || typeof this.vigilances[i].bloc_items.find(x => x.id === "DEP_QUALIFICATION_ZONAL" ) !== 'undefined' )) {
-      //if (this.vigilances[i].bloc_items.length > 0) {
-        let dept_id = this.vigilances[i].domain_id
-        let dept_name = this.vigilances[i].domain_name
-	if (typeof this.vigilances[i].bloc_items.find(x => x.id === "DEP_SUIVI" ) !== 'undefined' ) {
-          var Qualif = this.vigilances[i].bloc_items.find(x => x.id === "DEP_SUIVI" );
-        } else if (typeof this.vigilances[i].bloc_items.find(x => x.id === "DEP_QUALIFICATION" ) !== 'undefined') {
-          var Qualif = this.vigilances[i].bloc_items.find(x => x.id === "DEP_QUALIFICATION" );
-        } else if (typeof this.vigilances[i].bloc_items.find(x => x.id === "DEP_SITUATION" ) !== 'undefined') {
-          var Qualif = this.vigilances[i].bloc_items.find(x => x.id === "DEP_SITUATION" );
-        } else if (typeof this.vigilances[i].bloc_items.find(x => x.id === "DEP_QUALIFICATION_ZONAL" ) !== 'undefined' ) { 
-          var Qualif = this.vigilances[i].bloc_items.find(x => x.id === "DEP_QUALIFICATION_ZONAL" );
-        };
-        let hazard_code =  Qualif.text_items[0].hazard_code
-        //Log.info("hazard_code :" + hazard_code);
-        // let color = Qualif.text_items[0].term_items[0].risk_code
+      if (this.vigilances[i].bloc_items.length != 0 && ( 
+          typeof this.vigilances[i].bloc_items.find(x => x.id === "DEP_SITUATION" ) !== 'undefined' 
+          || typeof this.vigilances[i].bloc_items.find(x => x.id === "DEP_SUIVI" ) !== 'undefined' 
+          || typeof this.vigilances[i].bloc_items.find(x => x.id === "DEP_QUALIFICATION" ) !== 'undefined' 
+          || typeof this.vigilances[i].bloc_items.find(x => x.id === "DEP_QUALIFICATION_ZONAL" ) !== 'undefined' 
+        )) 
+        {
+          //if (this.vigilances[i].bloc_items.length > 0) {
+          let dept_id = this.vigilances[i].domain_id
+          let dept_name = this.vigilances[i].domain_name
+          if (typeof this.vigilances[i].bloc_items.find(x => x.id === "DEP_SUIVI" ) !== 'undefined' ) {
+            var Qualif = this.vigilances[i].bloc_items.find(x => x.id === "DEP_SUIVI" );
+          } else if (typeof this.vigilances[i].bloc_items.find(x => x.id === "DEP_QUALIFICATION" ) !== 'undefined') {
+            var Qualif = this.vigilances[i].bloc_items.find(x => x.id === "DEP_QUALIFICATION" );
+          } else if (typeof this.vigilances[i].bloc_items.find(x => x.id === "DEP_SITUATION" ) !== 'undefined') {
+            var Qualif = this.vigilances[i].bloc_items.find(x => x.id === "DEP_SITUATION" );
+          } else if (typeof this.vigilances[i].bloc_items.find(x => x.id === "DEP_QUALIFICATION_ZONAL" ) !== 'undefined' ) { 
+            var Qualif = this.vigilances[i].bloc_items.find(x => x.id === "DEP_QUALIFICATION_ZONAL" );
+          };
+          let hazard_code =  Qualif.text_items[0].hazard_code
+          //Log.info("hazard_code :" + hazard_code);
+          // let color = Qualif.text_items[0].term_items[0].risk_code
+          var rows=0;
+          if  (Date.parse(Qualif.text_items[0].term_items[0].end_time) > Date.now()) {
+            var color = this.colorClass[Qualif.text_items[0].term_items[0].risk_code];
 
-        
+            var row = document.createElement("tr");
+            table.appendChild(row);
 
-        
-        var color = this.colorClass[Qualif.text_items[0].term_items[0].risk_code];
+            var cell = document.createElement("td");
+            var risqueIdx = parseInt(hazard_code);
+            //Log.info("risqueIdx :" + risqueIdx);
+            cell.innerHTML =  dept_name+ " ("+dept_id+")" ;
+            cell.className = "dept " + color;
+            row.appendChild(cell);
 
-        var row = document.createElement("tr");
-        table.appendChild(row);
+            var iconCell = document.createElement("td");
+            iconCell.className = color + " weather-icon";
+            row.appendChild(iconCell);
 
-        var cell = document.createElement("td");
-        var risqueIdx = parseInt(hazard_code);
-        //Log.info("risqueIdx :" + risqueIdx);
-        cell.innerHTML =  dept_name+ " ("+dept_id+")" ;
-        cell.className = "dept " + color;
-        row.appendChild(cell);
-
-        var iconCell = document.createElement("td");
-  			iconCell.className = color + " weather-icon";
-  			row.appendChild(iconCell);
-
-  			var icon = document.createElement("span");
-  			icon.className = "wi weathericon " + this.risquesIcons[risqueIdx];
-        iconCell.appendChild(icon);
-      }
+            var icon = document.createElement("span");
+            icon.className = "wi weathericon " + this.risquesIcons[risqueIdx];
+            iconCell.appendChild(icon);
+            rows=rows++
+          }
+        }
+        if (rows==0) {
+          this.hide(1000, function() {
+		        //Module hidden
+	        });
+        }
     }
+
     wrapper.appendChild(table)
     return wrapper;
   },
